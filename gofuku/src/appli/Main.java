@@ -45,8 +45,8 @@ public class Main extends HttpServlet {
          if (param1 == null || param1 ==""){
              String query = "select from " + Order.class.getName();
              try {
-                 list = (List<Order>)manager.newQuery(query).execute();
-                 req.setAttribute("list", list);
+                 //list = (List<Order>)manager.newQuery(query).execute();
+                 //req.setAttribute("list", list);
              } catch(JDOObjectNotFoundException e){}
          } else {
              try {
@@ -55,17 +55,19 @@ public class Main extends HttpServlet {
                  list.add(data);
              } catch(JDOObjectNotFoundException e){}
          }
+        /*
          String res = "[";
          if (list != null){
         	 
              for(Order data:list){
                  res += "{id:" + data.getId() + "clothes:'" +data.getClothes()  + "'},";
              }
+             
          }
          res += "]";
          out.println(res);
          manager.close();
-     
+     	*/
 
     	
     	
@@ -114,11 +116,17 @@ public class Main extends HttpServlet {
      List<Order> list = null;
      if (param1 == null || param1 ==""){
          String query = "select from " + Order.class.getName();
-         try {
+         /*
+          try {
+          
              list = (List<Order>)manager.newQuery(query).execute();
              req.setAttribute("list", list);
          } catch(JDOObjectNotFoundException e){}
-     } else {
+         */
+     } 
+     /*
+      else {
+      
          try {
              Order data = (Order)manager.getObjectById(Order.class,Long.parseLong(param1));
              list = new ArrayList();
@@ -134,7 +142,7 @@ public class Main extends HttpServlet {
      res += "]";
      out.println(res);
      manager.close();
- 
+      */   
 
     HttpSession session = req.getSession();
     String userId = (String) session.getAttribute("userId");
@@ -182,4 +190,5 @@ public class Main extends HttpServlet {
         return "Short description";
     }// </editor-fold>*/
     }
+    
 }

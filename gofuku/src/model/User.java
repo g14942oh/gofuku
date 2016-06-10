@@ -37,7 +37,10 @@ public class User implements Serializable {
         this.mail = mail;
         this.name = name;
     }
-
+    public User(String userId, String pass) {
+        this.userId = userId;
+        this.pass = pass;
+    }
     public String getUserId() {
         return userId;
     }

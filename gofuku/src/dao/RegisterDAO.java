@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.appengine.api.datastore.*;
+
 import model.User;
 
 /**
@@ -20,7 +23,7 @@ import model.User;
 public class RegisterDAO {
 
     private final String DRIVER_NAME = "org.apache.derby.jdbc.ClientDriver";
-    private final String JDBC_URL = "jdbc:derby://localhost:1527/db5354";
+    private final String JDBC_URL = "agpzfnBhaXJwcm83chsLEgtfYWhfU0VTU0lPTiIKZ29mdWt1VXNlcgw";
     private final String DB_USER = "db";
     private final String DB_PASS = "db";
 
@@ -31,7 +34,7 @@ public class RegisterDAO {
             Class.forName(DRIVER_NAME);
             conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 
-            String sql = "SELECT USER_ID, PASS, MAIL, NAME FROM ACCOUNT ORDER BY USER_ID DESC";
+            String sql = "SELECT USER_ID, PASS, MAIL, NAME FROM gofukuUser ORDER BY USER_ID DESC";
             PreparedStatement pStmt = conn.prepareStatement(sql);
 
             ResultSet rs = pStmt.executeQuery();
@@ -65,6 +68,7 @@ public class RegisterDAO {
 
     public boolean create(User user) {
         Connection conn = null;
+        /*
         try {
             Class.forName(DRIVER_NAME);
             conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
@@ -96,6 +100,10 @@ public class RegisterDAO {
                 }
             }
         }
+        */
+        //Entity task = Entity.builder(keyFactory.newKey("sampleTask")).build();
+        //datastore.put(task);
+        
         return true;
     }
 }
