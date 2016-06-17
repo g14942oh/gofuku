@@ -16,7 +16,7 @@
     <body>
         <div id="header"></div>
         <div id="main">
-            <p>ようこそ<c:out value="${userId}" />さん</p><br />
+            <p>ログインできました。</p><br>
             <ul>
                 <li><div class="btn2"><a href="../main">ショップへ</a></div></li>
             </ul>

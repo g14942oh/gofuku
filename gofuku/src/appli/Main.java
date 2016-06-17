@@ -14,16 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.apphosting.api.UserServicePb.UserService;
+
 import appli.PMF;
-import javax.servlet.http.*;
 import model.Order;
 import model.User;
-import java.io.*;
 import java.util.*;
 import javax.jdo.*;
 /**
  *
- * @author g13953ts
+ * @author g14925mm,g14942oh
  */
 
 public class Main extends HttpServlet {
@@ -58,45 +59,44 @@ public class Main extends HttpServlet {
         /*
          String res = "[";
          if (list != null){
-        	 
              for(Order data:list){
                  res += "{id:" + data.getId() + "clothes:'" +data.getClothes()  + "'},";
              }
-             
          }
          res += "]";
          out.println(res);
          manager.close();
      	*/
+         //String query = "select from " + Order.class.getName();   	
+         //List<Order> orderList = getOrder.execute();
 
-    	
-    	
-    	//String query = "select from " + Order.class.getName();
-    	   	
-       // List<Order> orderList = getOrder.execute();
-        
 
+        com.google.appengine.api.users.UserService service = UserServiceFactory.getUserService();
         HttpSession session = req.getSession();
-        String userId = (String) session.getAttribute("userId");
         
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-            dispatcher.forward(req, resp);
-        
-        //processRequest(request, response);
-    }
+        if (service.isUserLoggedIn()){
+            //session.setAttribute("user", service.getCurrentUser());
+        } else {
+        	//User user = new User();
+        	//session.setAttribute("user",user);
+        }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+        dispatcher.forward(req, resp);
 
+    }
 
     @SuppressWarnings("unchecked")
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-      	 PersistenceManagerFactory factory = PMF.get();
-         PersistenceManager manager = factory.getPersistenceManager();
-    	req.setCharacterEncoding("UTF-8");
-        String param1 = req.getParameter("clothes[]");
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
+      	 //PersistenceManagerFactory factory = PMF.get();
+      	 //PersistenceManager manager = factory.getPersistenceManager();
+      	 req.setCharacterEncoding("UTF-8");
+      	 //String param1 = req.getParameter("clothes[]");
+      	 resp.setContentType("text/html");
+     	resp.setCharacterEncoding("UTF-8");
+     	req.setCharacterEncoding("utf-8");
+      	 //PrintWriter out = resp.getWriter();
         
-
         /*if (clothes != null && clothes.length() != 0) {
             HttpSession session = req.getSession();
             String userId = (String) session.getAttribute("userId");
@@ -111,11 +111,11 @@ public class Main extends HttpServlet {
         }
         reqDispatcher dispatcher = req.getreqDispatcher("/WEB-INF/jsp/main2.jsp");
         dispatcher.forward(req, resp);*/
-    	
- 
-     List<Order> list = null;
-     if (param1 == null || param1 ==""){
-         String query = "select from " + Order.class.getName();
+    
+      	 
+     //List<Order> list = null;
+     //if (param1 == null || param1 ==""){
+         //String query = "select from " + Order.class.getName();
          /*
           try {
           
@@ -123,10 +123,9 @@ public class Main extends HttpServlet {
              req.setAttribute("list", list);
          } catch(JDOObjectNotFoundException e){}
          */
-     } 
+    // } 
      /*
-      else {
-      
+      else {   
          try {
              Order data = (Order)manager.getObjectById(Order.class,Long.parseLong(param1));
              list = new ArrayList();
@@ -143,11 +142,9 @@ public class Main extends HttpServlet {
      out.println(res);
      manager.close();
       */   
-
-    HttpSession session = req.getSession();
-    String userId = (String) session.getAttribute("userId");
     
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/main2.jsp");
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/order.jsp");
         dispatcher.forward(req, resp);
         
      /*   request.setCharacterEncoding("UTF-8");
@@ -183,7 +180,6 @@ public class Main extends HttpServlet {
           }
           resp.sendRedirect("/index.html");
       }
-    	
 
     @Override
     public String getServletInfo() {

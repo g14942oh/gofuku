@@ -6,15 +6,18 @@ package model;
 
 import java.io.Serializable;
 
+//import com.google.appengine.api.users.UserService;
+//import com.google.appengine.api.users.UserServiceFactory;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.servlet.RequestDispatcher;
 
 /**
  *
- * @author g13953ts
+ * @author g14925mm,g14942oh
  */
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class User implements Serializable {
@@ -27,19 +30,12 @@ public class User implements Serializable {
     private String mail;
     @Persistent
     private String name;
-        
-    public User() {
-    }
 
-    public User(String userId, String pass, String mail, String name) {
-        this.userId = userId;
-        this.pass = pass;
-        this.mail = mail;
-        this.name = name;
-    }
-    public User(String userId, String pass) {
-        this.userId = userId;
-        this.pass = pass;
+    public User() {
+		this.userId ="umeko";
+		this.pass = "umePass";
+		this.mail ="umeko@gm.tusda";
+		this.name ="Umeko"; 	
     }
     public String getUserId() {
         return userId;
