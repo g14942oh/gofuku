@@ -1,7 +1,7 @@
 <%-- 
-    Document   : loginOK
+    Document   : logoutOK
     Created on : 2014/12/22, 16:54:15
-    Author     : g13953ts
+    Author     : g14925mm,g14942oh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,9 +16,9 @@
     <body>
         <div id="header"></div>
         <div id="main">
-            <p>ログインできました。</p><br>
+            <p>ログアウトできました。</p><br>
             <ul>
-                <li><div class="btn2"><a href="../main">ショップへ</a></div></li>
+                <li><div class="btn2"><a href="index.html">トップへ</a></div></li>
             </ul>
         </div>
         <div id="footer"></div>

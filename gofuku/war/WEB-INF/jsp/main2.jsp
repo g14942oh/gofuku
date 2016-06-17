@@ -40,8 +40,8 @@
             <c:forEach var="order" items="${orderList}" begin="0" end="0"> 
                 <p><c:out value="${order.userName}" />:
                     <c:out value="${order.clothes}" />
-                </c:forEach>--> <br />
-                <h3>注文することができました</h3>
+                </c:forEach>--> <br>
+                <h3>注文できました。</h3>
             <ul>
                 <li><div class="btn2"><a href="../main">戻る</a></div></li>
             </ul>
