@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.User"%>
 <%@page import="com.google.appengine.api.users.*"%>
-<%%>
+
 
 <!DOCTYPE html>
 <html>
@@ -35,6 +35,13 @@
 		<br><br>
                 <input type="submit" value="注文確定">
             </form>
+	    <table>
+        <form method="post" action="../main">
+            <tr><th>商品名:</th><td><input type="text" name="title"></td></tr>
+            <tr><th>個数:</th><td><input type="text" name="kosuu"></td></tr>
+            <tr><th></th><td><input type="submit" value="カゴに追加"></td></tr>
+        </form>
+        </table>
         </div>
         <div id="footer"></div>
     </body>

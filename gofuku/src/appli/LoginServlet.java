@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.appengine.api.users.*;
-import com.google.appengine.api.users.UserServiceFactory;
 
 /**
  *

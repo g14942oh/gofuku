@@ -14,10 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.apphosting.api.UserServicePb.UserService;
+import com.google.appengine.api.users.*;
 
 import appli.PMF;
+import model.Data;
 import model.Order;
 import model.User;
 import java.util.*;
@@ -46,8 +47,8 @@ public class Main extends HttpServlet {
          if (param1 == null || param1 ==""){
              String query = "select from " + Order.class.getName();
              try {
-                 //list = (List<Order>)manager.newQuery(query).execute();
-                 //req.setAttribute("list", list);
+                 list = (List<Order>)manager.newQuery(query).execute();
+                 req.setAttribute("list", list);
              } catch(JDOObjectNotFoundException e){}
          } else {
              try {
@@ -56,7 +57,7 @@ public class Main extends HttpServlet {
                  list.add(data);
              } catch(JDOObjectNotFoundException e){}
          }
-        /*
+        
          String res = "[";
          if (list != null){
              for(Order data:list){
@@ -66,8 +67,8 @@ public class Main extends HttpServlet {
          res += "]";
          out.println(res);
          manager.close();
-     	*/
-         //String query = "select from " + Order.class.getName();   	
+     	
+         String query = "select from " + Order.class.getName();   	
          //List<Order> orderList = getOrder.execute();
 
 
@@ -88,16 +89,16 @@ public class Main extends HttpServlet {
     @SuppressWarnings("unchecked")
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-      	 //PersistenceManagerFactory factory = PMF.get();
-      	 //PersistenceManager manager = factory.getPersistenceManager();
+      	 PersistenceManagerFactory factory = PMF.get();
+      	 PersistenceManager manager = factory.getPersistenceManager();
       	 req.setCharacterEncoding("UTF-8");
-      	 //String param1 = req.getParameter("clothes[]");
+      	 String param1 = req.getParameter("clothes[]");
       	 resp.setContentType("text/html");
      	resp.setCharacterEncoding("UTF-8");
      	req.setCharacterEncoding("utf-8");
-      	 //PrintWriter out = resp.getWriter();
-        
-        /*if (clothes != null && clothes.length() != 0) {
+      	 PrintWriter out = resp.getWriter();
+        /*
+       if (clothes != null && clothes.length() != 0) {
             HttpSession session = req.getSession();
             String userId = (String) session.getAttribute("userId");
             Order order = new Order(userId, clothes);
@@ -109,22 +110,21 @@ public class Main extends HttpServlet {
         } else {
             req.setAttribute("errorMsg", "注文が入力されていません。");
         }
-        reqDispatcher dispatcher = req.getreqDispatcher("/WEB-INF/jsp/main2.jsp");
-        dispatcher.forward(req, resp);*/
+        //reqDispatcher dispatcher = req.getreqDispatcher("/WEB-INF/jsp/main2.jsp");
+        //dispatcher.forward(req, resp);
     
       	 
-     //List<Order> list = null;
-     //if (param1 == null || param1 ==""){
-         //String query = "select from " + Order.class.getName();
-         /*
-          try {
-          
-             list = (List<Order>)manager.newQuery(query).execute();
+        List<Order> list = null;
+     	if (param1 == null || param1 ==""){
+    	 String query = "select from " + Order.class.getName();
+         
+    	 try {
+    		 list = (List<Order>)manager.newQuery(query).execute();
              req.setAttribute("list", list);
          } catch(JDOObjectNotFoundException e){}
-         */
-    // } 
-     /*
+         
+     	} 
+     	
       else {   
          try {
              Order data = (Order)manager.getObjectById(Order.class,Long.parseLong(param1));
@@ -141,11 +141,10 @@ public class Main extends HttpServlet {
      res += "]";
      out.println(res);
      manager.close();
-      */   
+         
     
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/order.jsp");
-        dispatcher.forward(req, resp);
+	*/
+       
         
      /*   request.setCharacterEncoding("UTF-8");
         String clothes = request.getParameter("clothes[]");
@@ -180,7 +179,28 @@ public class Main extends HttpServlet {
           }
           resp.sendRedirect("/index.html");
       }
-
+	*/  
+      	 /*
+      	com.google.appengine.api.users.UserService userService = UserServiceFactory.getUserService();
+      	HttpSession session = req.getSession();
+        com.google.appengine.api.users.User user = userService.getCurrentUser();
+      	session.setAttribute("user", userService.getCurrentUser());
+      	//resp.getWriter().println("ユーザID    :" + user.getUserId());
+      	String userId = user.getUserId();
+        String title = req.getParameter("title");
+        String price = req.getParameter("kosuu");
+        //String comment = req.getParameter("comment");
+        Data data = new Data(userId,title,price);
+        try {
+            manager.makePersistent(data);
+        } finally {
+            manager.close();
+        }
+        */
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/main2.jsp");
+        dispatcher.forward(req, resp);
+    
+	/*
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -14,12 +14,12 @@
             var res = '';
             if (json.length == 1){
                 res += '<tr><td>' + json[0].id +'</td></tr>';
-                res += '<tr><td>' + json[0].name +'</td></tr>';
                 res += '<tr><td>' + json[0].clothes +'</td></tr>';
+                res += '<tr><td>' + json[0].price +'</td></tr>';
             } else {
                 for (var i = 0;i < json.length;i++){
                     res += '<tr><td><a href="javascript:return false;" onclick="getData(' + json[i].id +');">' + json[i].id + '</a></td>';
-                    res += '<td><a href="' + json[i].name + '">' + json[i].clothes + '</a></td>';
+                    res += '<td><a href="' + json[i].clothes + '">' + json[i].price + '</a></td>';
                 }
             }
             var obj = document.getElementById("datatable");
@@ -36,12 +36,7 @@
         <td>wait..</td>
         </tr>
         </table>
-<!--
-            <c:forEach var="order" items="${orderList}" begin="0" end="0"> 
-                <p><c:out value="${order.userName}" />:
-                    <c:out value="${order.clothes}" />
-                </c:forEach>--> <br>
-                <h3>注文できました。</h3>
+		<h3>注文できました。</h3>
             <ul>
                 <li><div class="btn2"><a href="../main">戻る</a></div></li>
             </ul>
